@@ -7,6 +7,9 @@ import {
   type RippleButtonProps,
 } from "@/components/animate-ui/components/buttons/ripple";
 
+import { calculateInps, taxableIRPEF, calculateGrossIrpef } from "@/lib/tax";
+import { getValidatedRal } from "@/lib/handler";
+
 interface CalculateButtonProps {
   variant: RippleButtonProps["variant"];
   size: RippleButtonProps["size"];
@@ -17,18 +20,19 @@ export default function CalculateButton({
   size,
 }: CalculateButtonProps) {
   const handleClick = () => {
-    const input = document.getElementById("ral") as HTMLInputElement | null;
-    const raw = input?.value?.trim() ?? "";
-    const normalized = raw.replace(",", ".");
-    const value = Number(normalized);
-
-    if (!raw || Number.isNaN(value) || value <= 0) {
-      alert("Inserisci un numero valido maggiore di 0");
-      input?.focus();
-      return;
-    }
+    const value = getValidatedRal("ral");
+    if (value == null) return;
 
     console.log("RAL valido:", value);
+
+    const inps = calculateInps(value);
+    console.log("INPS (9.19%):", inps);
+
+    const imponibile = taxableIRPEF(value, inps);
+    console.log("Imponibile IRPEF:", imponibile);
+
+    const grossIrpef = calculateGrossIrpef(imponibile);
+    console.log("IRPEF lorda:", grossIrpef);
   };
 
   return (

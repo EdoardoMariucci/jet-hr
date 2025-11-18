@@ -1,11 +1,13 @@
-import { RALInput } from "@/components/RalInput";
-import CalculateButton from "@/components/Button";
+import CalcCard from "@/components/CalcCard";
+import RecapCard from "@/components/RecapCard";
+import DetailedCard from "@/components/DetailedCard";
 
 export default function Home() {
   return (
-    <div>
-      <RALInput />
-      <CalculateButton variant="default" size="default" />
+    <div className="flex justify-center items-center h-screen gap-4">
+      <CalcCard />
+      <RecapCard />
+      <DetailedCard />
     </div>
   );
 }
