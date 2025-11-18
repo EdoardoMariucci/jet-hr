@@ -12,8 +12,10 @@ export default function DetailedCard() {
   return (
     <Card className="w-full max-w-164">
       <CardHeader>
-        <CardTitle>Informazioni Dettagliate</CardTitle>
-        <CardDescription>Scheda con tutti i dati dettagliati.</CardDescription>
+        <CardTitle>Dettagli sulle Tasse</CardTitle>
+        <CardDescription>
+          Scheda con tutti i dati dettagliati sulle tasse.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form className="space-y-6">
@@ -24,9 +26,9 @@ export default function DetailedCard() {
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="ral">RAL</Label>
+                <Label htmlFor="ral-detailed">RAL</Label>
                 <Input
-                  id="ral"
+                  id="ral-detailed"
                   type="text"
                   placeholder="30000"
                   readOnly

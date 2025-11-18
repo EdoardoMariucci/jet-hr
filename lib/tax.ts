@@ -127,3 +127,37 @@ export function recap(ral: number): RecapResult {
 
   return { totalTax, annualNet, monthlyNet };
 }
+
+export interface AverageRateResult {
+  averageTaxRate: number;
+  averageContributionRate: number;
+  overallAverageRate: number;
+}
+
+export function averageRate(ral: number): AverageRateResult {
+  if (!Number.isFinite(ral) || ral === 0) {
+    return {
+      averageTaxRate: NaN,
+      averageContributionRate: NaN,
+      overallAverageRate: NaN,
+    };
+  }
+
+  const inps = calculateInps(ral);
+  const taxable = taxableIRPEF(ral, inps);
+
+  const gross = grossIrpef(taxable);
+  const deduction = deductionIrpef(taxable);
+  const net = netIrpef(gross, deduction);
+
+  const regional = regionalTax(taxable);
+  const milan = milanTax(taxable);
+
+  const totalTax = net + regional + milan;
+
+  const averageTaxRate = totalTax / ral;
+  const averageContributionRate = inps / ral;
+  const overallAverageRate = (totalTax + inps) / ral;
+
+  return { averageTaxRate, averageContributionRate, overallAverageRate };
+}

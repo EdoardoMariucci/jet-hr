@@ -1,6 +1,7 @@
 import CalcCard from "@/components/CalcCard";
 import RecapCard from "@/components/RecapCard";
 import DetailedCard from "@/components/DetailedCard";
+import { InfoDock } from "@/components/Dock";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <RecapCard />
       </div>
       <DetailedCard />
+      <InfoDock />
     </div>
   );
 }
