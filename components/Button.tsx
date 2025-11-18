@@ -18,6 +18,7 @@ import {
   regionalTax,
   milanTax,
   averageRate,
+  totalTaxes,
 } from "@/lib/tax";
 
 interface CalculateButtonProps {
@@ -43,6 +44,7 @@ export default function CalculateButton({
     const comunale = milanTax(imponibile);
     const { averageTaxRate, averageContributionRate, overallAverageRate } =
       averageRate(value);
+    const trattenute = totalTaxes(value);
 
     const setValue = (id: string, amount: number) => {
       const input = document.getElementById(id) as HTMLInputElement | null;
@@ -67,6 +69,7 @@ export default function CalculateButton({
     setValue("aliquota-media-fiscale", averageTaxRate * 100);
     setValue("aliquota-media-contributiva", averageContributionRate * 100);
     setValue("aliquota-media-complessiva", overallAverageRate * 100);
+    setValue("totale-trattenute", trattenute);
   };
 
   return (

@@ -161,3 +161,19 @@ export function averageRate(ral: number): AverageRateResult {
 
   return { averageTaxRate, averageContributionRate, overallAverageRate };
 }
+
+export function totalTaxes(ral: number): number {
+  if (!Number.isFinite(ral)) return NaN;
+
+  const inps = calculateInps(ral);
+  const taxable = taxableIRPEF(ral, inps);
+
+  const gross = grossIrpef(taxable);
+  const deduction = deductionIrpef(taxable);
+  const net = netIrpef(gross, deduction);
+
+  const regional = regionalTax(taxable);
+  const milan = milanTax(taxable);
+
+  return inps + net + regional + milan;
+}

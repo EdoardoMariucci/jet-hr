@@ -94,10 +94,7 @@ const DATA = {
 
 export function InfoDock() {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <span className="pointer-events-none bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-white dark:to-slate-900/10">
-        Dock
-      </span>
+    <div className="fixed inset-x-0 bottom-6 z-50 flex items-center justify-center">
       <TooltipProvider>
         <Dock direction="middle">
           {DATA.navbar.map((item) => (
