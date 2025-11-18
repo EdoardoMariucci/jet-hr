@@ -13,7 +13,7 @@ export function taxableIRPEF(ral: number, inps: number): number {
   return taxable > 0 ? taxable : 0;
 }
 
-export function calculateGrossIrpef(taxable: number): number {
+export function grossIrpef(taxable: number): number {
   if (!Number.isFinite(taxable)) return NaN;
 
   const bracket1Limit = 28000;
@@ -40,7 +40,7 @@ export function calculateGrossIrpef(taxable: number): number {
   return quota1 + quota2 + quota3;
 }
 
-export function calculateDeductionIrpef(taxable: number): number {
+export function deductionIrpef(taxable: number): number {
   if (!Number.isFinite(taxable)) return NaN;
 
   const t = taxable;
@@ -114,8 +114,8 @@ export function recap(ral: number): RecapResult {
   const inps = calculateInps(ral);
   const taxable = taxableIRPEF(ral, inps);
 
-  const gross = calculateGrossIrpef(taxable);
-  const deduction = calculateDeductionIrpef(taxable);
+  const gross = grossIrpef(taxable);
+  const deduction = deductionIrpef(taxable);
   const net = netIrpef(gross, deduction);
 
   const regional = regionalTax(taxable);

@@ -4,9 +4,11 @@ import DetailedCard from "@/components/DetailedCard";
 
 export default function Home() {
   return (
-    <div className="flex justify-center items-center h-screen gap-4">
-      <CalcCard />
-      <RecapCard />
+    <div className="flex flex-col items-center justify-center gap-4 py-12">
+      <div className="flex gap-4">
+        <CalcCard />
+        <RecapCard />
+      </div>
       <DetailedCard />
     </div>
   );

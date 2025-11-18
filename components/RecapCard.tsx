@@ -24,8 +24,9 @@ export default function RecapCard() {
                 id="netto-annuale"
                 type="text"
                 placeholder="30000"
-                disabled
-                className="w-40 disabled:opacity-100 disabled:cursor-default"
+                readOnly
+                aria-readonly="true"
+                className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
               />
             </div>
             <div className="grid gap-2">
@@ -36,8 +37,9 @@ export default function RecapCard() {
                 id="netto-mensile"
                 type="text"
                 placeholder="1000"
-                disabled
-                className="w-40 disabled:opacity-100 disabled:cursor-default"
+                readOnly
+                aria-readonly="true"
+                className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
               />
             </div>
 
@@ -49,8 +51,9 @@ export default function RecapCard() {
                 id="totale-tasse"
                 type="text"
                 placeholder="3000"
-                disabled
-                className="w-40 disabled:opacity-100 disabled:cursor-default"
+                readOnly
+                aria-readonly="true"
+                className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
               />
             </div>
             <div className="grid gap-2">
@@ -61,8 +64,9 @@ export default function RecapCard() {
                 id="contributi-inps"
                 type="text"
                 placeholder="1000"
-                disabled
-                className="w-40 disabled:opacity-100 disabled:cursor-default"
+                readOnly
+                aria-readonly="true"
+                className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
               />
             </div>
           </div>
