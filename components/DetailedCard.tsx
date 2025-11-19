@@ -14,7 +14,7 @@ export default function DetailedCard() {
       <CardHeader>
         <CardTitle>Dettagli sulle Tasse</CardTitle>
         <CardDescription>
-          Scheda con tutti i dati dettagliati sulle tasse.
+          Scheda con tutti i dati dettagliati sulle tasse. 🔍
         </CardDescription>
       </CardHeader>
       <CardContent>

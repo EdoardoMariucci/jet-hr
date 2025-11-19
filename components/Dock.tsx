@@ -2,7 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { CalendarIcon, HomeIcon, MailIcon, PencilIcon } from "lucide-react";
+import {
+  //Calculator,
+  CalendarIcon,
+  MailIcon,
+  Scale,
+  Globe,
+  UserRoundSearch,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -16,6 +23,11 @@ import {
 import { Dock, DockIcon } from "@/components/ui/dock";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
+
+type InfoDockProps = {
+  onOpenContext?: () => void;
+  onOpenLegislation?: () => void;
+};
 
 const Icons = {
   calendar: (props: IconProps) => <CalendarIcon {...props} />,
@@ -63,36 +75,32 @@ const Icons = {
 
 const DATA = {
   navbar: [
-    { href: "#", icon: HomeIcon, label: "Home" },
-    { href: "#", icon: PencilIcon, label: "Blog" },
+    { href: "#", icon: UserRoundSearch, label: "Contesto" },
+    { href: "#", icon: Scale, label: "Normativa" },
+    /* { href: "#", icon: Calculator, label: "Calcolo" }, */
   ],
   contact: {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "#",
+        url: "https://github.com/EdoardoMariucci/jet-hr",
         icon: Icons.github,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "#",
+        url: "https://www.linkedin.com/in/edoardo-mariucci-773b04326/",
         icon: Icons.linkedin,
       },
-      X: {
-        name: "X",
-        url: "#",
-        icon: Icons.x,
-      },
       email: {
-        name: "Send Email",
-        url: "#",
-        icon: Icons.email,
+        name: "Sito web",
+        url: "https://edoardomariucci.dev",
+        icon: Globe,
       },
     },
   },
 };
 
-export function InfoDock() {
+export function InfoDock({ onOpenContext, onOpenLegislation }: InfoDockProps) {
   return (
     <div className="fixed inset-x-0 bottom-6 z-50 flex items-center justify-center">
       <TooltipProvider>
@@ -104,6 +112,16 @@ export function InfoDock() {
                   <Link
                     href={item.href}
                     aria-label={item.label}
+                    onClick={(e) => {
+                      if (item.label === "Contesto" && onOpenContext) {
+                        e.preventDefault();
+                        onOpenContext();
+                      }
+                      if (item.label === "Normativa" && onOpenLegislation) {
+                        e.preventDefault();
+                        onOpenLegislation();
+                      }
+                    }}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12 rounded-full"
@@ -126,6 +144,8 @@ export function InfoDock() {
                   <Link
                     href={social.url}
                     aria-label={social.name}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12 rounded-full"

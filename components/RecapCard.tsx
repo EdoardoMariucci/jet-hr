@@ -12,8 +12,10 @@ export default function RecapCard() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Netto Annuale e Mensile</CardTitle>
-        <CardDescription>Mi sa che ti conviene trasferirti!</CardDescription>
+        <CardTitle>Riassunto</CardTitle>
+        <CardDescription>
+          Scheda riassuntiva sui netti e tasse. 💸
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form>

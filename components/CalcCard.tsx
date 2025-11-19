@@ -16,7 +16,7 @@ const CalcCard = () => {
       <CardHeader>
         <CardTitle>Calcola il tuo Netto</CardTitle>
         <CardDescription>
-          Inserisci il tuo RAL e scopri se ti conviene trasferirti a Dubai! 🙃
+          Inserisci il tuo RAL e scopri quanto ti spetta di netto! 💰
         </CardDescription>
       </CardHeader>
       <CardContent>
