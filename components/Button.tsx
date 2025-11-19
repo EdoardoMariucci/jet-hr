@@ -71,6 +71,18 @@ export default function CalculateButton({
     setValue("aliquota-media-contributiva", averageContributionRate * 100);
     setValue("aliquota-media-complessiva", overallAverageRate * 100);
     setValue("totale-trattenute", trattenute);
+
+    window.dispatchEvent(
+      new CustomEvent("tax:computed", {
+        detail: {
+          inps,
+          irpef: netto,
+          regionali: regionale,
+          comunali: comunale,
+          overallAverageRate,
+        },
+      })
+    );
   };
 
   return (

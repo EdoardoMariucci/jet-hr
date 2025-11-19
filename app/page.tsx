@@ -3,6 +3,7 @@ import RecapCard from "@/components/RecapCard";
 import DetailedCard from "@/components/DetailedCard";
 import DialogController from "@/components/DialogController";
 import Logo from "@/components/Logo";
+import TaxChart from "@/components/TaxChart";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </div>
       <DetailedCard />
       <DialogController />
+      <TaxChart />
     </div>
   );
 }
