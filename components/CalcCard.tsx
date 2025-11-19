@@ -24,12 +24,7 @@ const CalcCard = () => {
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="ral">RAL</Label>
-              <Input
-                id="ral"
-                type="text"
-                placeholder="Inserisci RAL"
-                required
-              />
+              <Input id="ral" type="text" placeholder="30.000" required />
             </div>
           </div>
         </form>
