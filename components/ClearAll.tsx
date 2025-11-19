@@ -31,6 +31,9 @@ const ClearAll = () => {
     clearValue("aliquota-media-contributiva");
     clearValue("aliquota-media-complessiva");
     clearValue("totale-trattenute");
+
+    // Notify listeners (e.g., TaxChart) to reset placeholders.
+    window.dispatchEvent(new CustomEvent("tax:reset"));
   };
 
   return (

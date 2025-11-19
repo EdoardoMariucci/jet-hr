@@ -100,13 +100,26 @@ export default function TaxChart() {
       ]);
     };
 
+    const resetHandler = () => {
+      setOverallAvgPercent(25);
+      setChartData([
+        { tax: "IRPEF Netta", value: 4222, fill: "var(--color-IRPEF_Netta)" },
+        { tax: "INPS", value: 2757, fill: "var(--color-INPS)" },
+        { tax: "Comunali", value: 218, fill: "var(--color-Comunali)" },
+        { tax: "Regionali", value: 378, fill: "var(--color-Regionali)" },
+      ]);
+    };
+
     window.addEventListener("tax:computed", handler as EventListener);
-    return () =>
+    window.addEventListener("tax:reset", resetHandler as EventListener);
+    return () => {
       window.removeEventListener("tax:computed", handler as EventListener);
+      window.removeEventListener("tax:reset", resetHandler as EventListener);
+    };
   }, []);
 
   return (
-    <Card className="flex flex-col">
+    <Card className="w-full max-w-sm flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>
           Divisione Tasse
@@ -125,7 +138,7 @@ export default function TaxChart() {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="h-[260px] w-[360px] aspect-auto [&_.recharts-text]:fill-background mx-auto"
+          className="h-[260px] w-full aspect-auto [&_.recharts-text]:fill-background mx-auto"
         >
           <PieChart>
             <ChartTooltip
