@@ -23,7 +23,7 @@ export default function RecapCard() {
               <Input
                 id="netto-annuale"
                 type="text"
-                placeholder="30000"
+                placeholder="22.426"
                 readOnly
                 aria-readonly="true"
                 className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -36,7 +36,7 @@ export default function RecapCard() {
               <Input
                 id="netto-mensile"
                 type="text"
-                placeholder="1000"
+                placeholder="1.725"
                 readOnly
                 aria-readonly="true"
                 className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -50,7 +50,7 @@ export default function RecapCard() {
               <Input
                 id="totale-tasse"
                 type="text"
-                placeholder="3000"
+                placeholder="4.817"
                 readOnly
                 aria-readonly="true"
                 className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -63,7 +63,7 @@ export default function RecapCard() {
               <Input
                 id="contributi-inps"
                 type="text"
-                placeholder="1000"
+                placeholder="2.757"
                 readOnly
                 aria-readonly="true"
                 className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"

@@ -1,67 +1,105 @@
+export const INPS_RATE = 0.0919;
+export const MONTHS = 13;
+
+export const IRPEF_BRACKETS = [
+  { upTo: 28000, rate: 0.23 },
+  { upTo: 50000, rate: 0.35 },
+  { rate: 0.43 },
+] as const;
+
+export const REGIONAL_BRACKETS = [
+  { upTo: 15000, rate: 0.0123 },
+  { upTo: 28000, rate: 0.0158 },
+  { upTo: 50000, rate: 0.0172 },
+  { rate: 0.0173 },
+] as const;
+
+// Deductions constants
+export const DEDUC_A = 1955;
+export const DEDUC_B = 1910;
+export const DEDUC_C = 1190;
+export const DEDUC_SEG2_DENOM = 13000;
+export const DEDUC_SEG3_DENOM = 22000;
+export const DEDUC_LIMIT_1 = 15000;
+export const DEDUC_LIMIT_2 = 28000;
+export const DEDUC_LIMIT_3 = 50000;
+export const BONUS_LOWER = 25000;
+export const BONUS_UPPER = 35000;
+export const BONUS_65 = 65;
+
+// Milan add-on constants
+export const MILAN_THRESHOLD = 23000;
+export const MILAN_RATE = 0.008;
+
+type Tier = { upTo?: number; rate: number };
+
+export function isFiniteNumber(n: number): boolean {
+  return Number.isFinite(n);
+}
+
+export function clampAtZero(n: number): number {
+  return n > 0 ? n : 0;
+}
+
+export function computeProgressiveTax(
+  amount: number,
+  tiers: readonly Tier[]
+): number {
+  if (!Number.isFinite(amount)) return NaN;
+  if (amount <= 0) return 0;
+  let remaining = amount;
+  let lastCap = 0;
+  let total = 0;
+  for (const { upTo, rate } of tiers) {
+    const cap = upTo ?? Number.POSITIVE_INFINITY;
+    const span = Math.min(Math.max(remaining, 0), cap - lastCap);
+    if (span > 0) total += span * rate;
+    remaining -= span;
+    lastCap = cap;
+    if (remaining <= 0) break;
+  }
+  return total;
+}
+
 export function calculatePercentage(base: number, percent: number): number {
   if (!Number.isFinite(base)) return NaN;
   return base * (percent / 100);
 }
 
 export function calculateInps(base: number): number {
-  return calculatePercentage(base, 9.19);
+  // Keep calculatePercentage usage; INPS_RATE is expressed as a fraction.
+  return calculatePercentage(base, INPS_RATE * 100);
 }
 
 export function taxableIRPEF(ral: number, inps: number): number {
   if (!Number.isFinite(ral) || !Number.isFinite(inps)) return NaN;
-  const taxable = ral - inps;
-  return taxable > 0 ? taxable : 0;
+  return clampAtZero(ral - inps);
 }
 
 export function grossIrpef(taxable: number): number {
-  if (!Number.isFinite(taxable)) return NaN;
-
-  const bracket1Limit = 28000;
-  const bracket2Limit = 50000;
-
-  const rate1 = 0.23;
-  const rate2 = 0.35;
-  const rate3 = 0.43;
-
-  if (taxable <= bracket1Limit) {
-    return taxable * rate1;
-  }
-
-  if (taxable <= bracket2Limit) {
-    const quota1 = bracket1Limit * rate1;
-    const quota2 = (taxable - bracket1Limit) * rate2;
-    return quota1 + quota2;
-  }
-
-  const quota1 = bracket1Limit * rate1;
-  const quota2 = (bracket2Limit - bracket1Limit) * rate2;
-  const quota3 = (taxable - bracket2Limit) * rate3;
-
-  return quota1 + quota2 + quota3;
+  return computeProgressiveTax(taxable, IRPEF_BRACKETS);
 }
 
 export function deductionIrpef(taxable: number): number {
   if (!Number.isFinite(taxable)) return NaN;
 
   const t = taxable;
-  const bracket1Limit = 15000;
-  const bracket2Limit = 28000;
-  const bracket3Limit = 50000;
 
   let basicDeduction = 0;
 
-  if (t <= bracket1Limit) {
-    basicDeduction = 1955;
-  } else if (t <= bracket2Limit) {
-    basicDeduction = 1910 + (1190 * (bracket2Limit - t)) / 13000;
-  } else if (t <= bracket3Limit) {
-    basicDeduction = (1910 * (bracket3Limit - t)) / 22000;
+  if (t <= DEDUC_LIMIT_1) {
+    basicDeduction = DEDUC_A;
+  } else if (t <= DEDUC_LIMIT_2) {
+    basicDeduction =
+      DEDUC_B + (DEDUC_C * (DEDUC_LIMIT_2 - t)) / DEDUC_SEG2_DENOM;
+  } else if (t <= DEDUC_LIMIT_3) {
+    basicDeduction = (DEDUC_B * (DEDUC_LIMIT_3 - t)) / DEDUC_SEG3_DENOM;
   } else {
     basicDeduction = 0;
   }
 
-  if (t > 25000 && t <= 35000) {
-    basicDeduction += 65;
+  if (t > BONUS_LOWER && t <= BONUS_UPPER) {
+    basicDeduction += BONUS_65;
   }
 
   if (basicDeduction < 0) basicDeduction = 0;
@@ -72,32 +110,18 @@ export function netIrpef(grossIrpef: number, deductionIrpef: number): number {
   if (!Number.isFinite(grossIrpef) || !Number.isFinite(deductionIrpef)) {
     return NaN;
   }
-  const net = grossIrpef - deductionIrpef;
-  return net > 0 ? net : 0;
+  return clampAtZero(grossIrpef - deductionIrpef);
 }
 
 export function regionalTax(taxable: number): number {
-  if (!Number.isFinite(taxable)) return NaN;
-  const t = taxable;
-  if (t <= 0) return 0;
-
-  const b1 = 15000;
-  const b2 = 28000;
-  const b3 = 50000;
-
-  const quota1 = Math.min(t, b1) * 0.0123;
-  const quota2 = Math.min(Math.max(t - b1, 0), b2 - b1) * 0.0158;
-  const quota3 = Math.min(Math.max(t - b2, 0), b3 - b2) * 0.0172;
-  const quota4 = Math.max(t - b3, 0) * 0.0173;
-
-  return quota1 + quota2 + quota3 + quota4;
+  return computeProgressiveTax(taxable, REGIONAL_BRACKETS);
 }
 
 export function milanTax(taxable: number): number {
   if (!Number.isFinite(taxable)) return NaN;
   const t = taxable;
-  if (t <= 23000) return 0;
-  return t * 0.008;
+  if (t <= MILAN_THRESHOLD) return 0;
+  return t * MILAN_RATE;
 }
 
 export interface RecapResult {
@@ -123,7 +147,7 @@ export function recap(ral: number): RecapResult {
 
   const totalTax = net + regional + milan;
   const annualNet = ral - inps - totalTax;
-  const monthlyNet = annualNet / 13;
+  const monthlyNet = annualNet / MONTHS;
 
   return { totalTax, annualNet, monthlyNet };
 }

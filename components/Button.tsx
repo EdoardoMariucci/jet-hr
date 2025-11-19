@@ -52,12 +52,13 @@ export default function CalculateButton({
       input.value = Number.isFinite(amount) ? String(Math.round(amount)) : "-";
     };
 
+    //RecapCard
     setValue("totale-tasse", totalTax);
     setValue("netto-annuale", annualNet);
     setValue("netto-mensile", monthlyNet);
     setValue("contributi-inps", inps);
 
-    // DetailedCard fields
+    // DetailedCard
     setValue("ral-detailed", value);
     setValue("inps", inps);
     setValue("imponibile", imponibile);

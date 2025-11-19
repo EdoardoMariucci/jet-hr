@@ -30,7 +30,7 @@ export default function DetailedCard() {
                 <Input
                   id="ral-detailed"
                   type="text"
-                  placeholder="30000"
+                  placeholder="30.000"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -41,7 +41,7 @@ export default function DetailedCard() {
                 <Input
                   id="inps"
                   type="text"
-                  placeholder="30000"
+                  placeholder="2.757"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -54,7 +54,7 @@ export default function DetailedCard() {
                 <Input
                   id="imponibile"
                   type="text"
-                  placeholder="1000"
+                  placeholder="27.243"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -74,7 +74,7 @@ export default function DetailedCard() {
                 <Input
                   id="lordo"
                   type="text"
-                  placeholder="30000"
+                  placeholder="6.266"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -85,7 +85,7 @@ export default function DetailedCard() {
                 <Input
                   id="detrazione"
                   type="text"
-                  placeholder="30000"
+                  placeholder="2.044"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -98,7 +98,7 @@ export default function DetailedCard() {
                 <Input
                   id="netto"
                   type="text"
-                  placeholder="1000"
+                  placeholder="4.222"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -122,7 +122,7 @@ export default function DetailedCard() {
                 <Input
                   id="addizionali-regionali"
                   type="text"
-                  placeholder="3000"
+                  placeholder="378"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -137,7 +137,7 @@ export default function DetailedCard() {
                 <Input
                   id="addizionali-comunali"
                   type="text"
-                  placeholder="1000"
+                  placeholder="218"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -159,7 +159,7 @@ export default function DetailedCard() {
                 <Input
                   id="aliquota-media-fiscale"
                   type="text"
-                  placeholder="30000"
+                  placeholder="16"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -172,7 +172,7 @@ export default function DetailedCard() {
                 <Input
                   id="aliquota-media-contributiva"
                   type="text"
-                  placeholder="30000"
+                  placeholder="9"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -185,7 +185,7 @@ export default function DetailedCard() {
                 <Input
                   id="aliquota-media-complessiva"
                   type="text"
-                  placeholder="30000"
+                  placeholder="25"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
@@ -201,11 +201,13 @@ export default function DetailedCard() {
             </h4>
             <div className="grid grid-cols-1 gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="totale-trattenute">Totale Trattenute</Label>
+                <Label htmlFor="totale-trattenute">
+                  Totale Trattenute (IRPEF Netta + Addizionali + INPS)
+                </Label>
                 <Input
                   id="totale-trattenute"
                   type="text"
-                  placeholder="-"
+                  placeholder="7.574"
                   readOnly
                   aria-readonly="true"
                   className="cursor-default caret-transparent focus-visible:ring-0 focus-visible:border-input"
