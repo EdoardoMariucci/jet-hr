@@ -91,7 +91,7 @@ const DATA = {
         url: "https://www.linkedin.com/in/edoardo-mariucci-773b04326/",
         icon: Icons.linkedin,
       },
-      email: {
+      SitoWeb: {
         name: "Sito web",
         url: "https://edoardomariucci.dev",
         icon: Globe,
