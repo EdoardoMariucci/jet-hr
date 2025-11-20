@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 
 export default function DetailedCard() {
   return (
-    <Card className="w-full max-w-164">
+    <Card className="w-full max-w-196">
       <CardHeader>
         <CardTitle>Dettagli sulle Tasse</CardTitle>
         <CardDescription>

@@ -59,6 +59,8 @@ export default function TaxChart() {
       regionali: number;
       comunali: number;
       overallAverageRate?: number;
+      //ral?: number;
+      //annualNet?: number;
     };
 
     const handler = (e: Event) => {

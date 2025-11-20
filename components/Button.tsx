@@ -75,11 +75,13 @@ export default function CalculateButton({
     window.dispatchEvent(
       new CustomEvent("tax:computed", {
         detail: {
+          ral: value,
           inps,
           irpef: netto,
           regionali: regionale,
           comunali: comunale,
           overallAverageRate,
+          annualNet,
         },
       })
     );
